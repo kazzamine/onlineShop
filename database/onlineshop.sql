@@ -1,14 +1,13 @@
 -- phpMyAdmin SQL Dump
--- version 4.8.2
+-- version 5.2.0
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 23, 2019 at 07:53 PM
--- Server version: 10.1.34-MariaDB
--- PHP Version: 7.2.7
+-- Generation Time: May 02, 2024 at 05:26 PM
+-- Server version: 10.4.27-MariaDB
+-- PHP Version: 7.4.33
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
-SET AUTOCOMMIT = 0;
 START TRANSACTION;
 SET time_zone = "+00:00";
 
@@ -19,14 +18,14 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `ecommerece`
+-- Database: `onlineshop`
 --
 
 DELIMITER $$
 --
 -- Procedures
 --
-CREATE DEFINER=`root`@`localhost` PROCEDURE `getcat` (IN `cid` INT)  SELECT * FROM categories WHERE cat_id=cid$$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `getcat` (IN `cid` INT)   SELECT * FROM categories WHERE cat_id=cid$$
 
 DELIMITER ;
 
@@ -41,7 +40,7 @@ CREATE TABLE `admin_info` (
   `admin_name` varchar(100) NOT NULL,
   `admin_email` varchar(300) NOT NULL,
   `admin_password` varchar(300) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
 --
 -- Dumping data for table `admin_info`
@@ -59,7 +58,7 @@ INSERT INTO `admin_info` (`admin_id`, `admin_name`, `admin_email`, `admin_passwo
 CREATE TABLE `brands` (
   `brand_id` int(100) NOT NULL,
   `brand_title` text NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
 --
 -- Dumping data for table `brands`
@@ -85,7 +84,7 @@ CREATE TABLE `cart` (
   `ip_add` varchar(250) NOT NULL,
   `user_id` int(10) DEFAULT NULL,
   `qty` int(10) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
 --
 -- Dumping data for table `cart`
@@ -119,7 +118,7 @@ INSERT INTO `cart` (`id`, `p_id`, `ip_add`, `user_id`, `qty`) VALUES
 CREATE TABLE `categories` (
   `cat_id` int(100) NOT NULL,
   `cat_title` text NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
 --
 -- Dumping data for table `categories`
@@ -143,7 +142,7 @@ INSERT INTO `categories` (`cat_id`, `cat_title`) VALUES
 CREATE TABLE `email_info` (
   `email_id` int(100) NOT NULL,
   `email` text NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
 --
 -- Dumping data for table `email_info`
@@ -165,7 +164,7 @@ CREATE TABLE `logs` (
   `user_id` varchar(50) NOT NULL,
   `action` varchar(50) NOT NULL,
   `date` datetime NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
 -- --------------------------------------------------------
 
@@ -180,7 +179,7 @@ CREATE TABLE `orders` (
   `qty` int(11) NOT NULL,
   `trx_id` varchar(255) NOT NULL,
   `p_status` varchar(20) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
 --
 -- Dumping data for table `orders`
@@ -211,14 +210,16 @@ CREATE TABLE `orders_info` (
   `prod_count` int(15) DEFAULT NULL,
   `total_amt` int(15) DEFAULT NULL,
   `cvv` int(5) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
 --
 -- Dumping data for table `orders_info`
 --
 
 INSERT INTO `orders_info` (`order_id`, `user_id`, `f_name`, `email`, `address`, `city`, `state`, `zip`, `cardname`, `cardnumber`, `expdate`, `prod_count`, `total_amt`, `cvv`) VALUES
-(1, 12, 'Puneeth', 'puneethreddy951@gmail.com', 'Bangalore, Kumbalagodu, Karnataka', 'Bangalore', 'Karnataka', 560074, 'pokjhgfcxc', '4321 2345 6788 7654', '12/90', 3, 77000, 1234);
+(1, 12, 'Puneeth', 'puneethreddy951@gmail.com', 'Bangalore, Kumbalagodu, Karnataka', 'Bangalore', 'Karnataka', 560074, 'pokjhgfcxc', '4321 2345 6788 7654', '12/90', 3, 77000, 1234),
+(2, 26, 'aa aaa', 'alkefyhzizem@gmail.com', 'morocco', 'morooco', 'eeee', 423343, 'TESTMEE', '243543245654345', '12/67', 1, 5000, 123),
+(3, 26, 'aa aaa', 'alkefyhzizem@gmail.com', 'morocco', 'morooco', 'eeee', 423343, 'TESTMEE', '98765432234587', '12/23', 1, 5000, 123);
 
 -- --------------------------------------------------------
 
@@ -232,7 +233,7 @@ CREATE TABLE `order_products` (
   `product_id` int(11) NOT NULL,
   `qty` int(15) DEFAULT NULL,
   `amt` int(15) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
 --
 -- Dumping data for table `order_products`
@@ -241,7 +242,9 @@ CREATE TABLE `order_products` (
 INSERT INTO `order_products` (`order_pro_id`, `order_id`, `product_id`, `qty`, `amt`) VALUES
 (73, 1, 1, 1, 5000),
 (74, 1, 4, 2, 64000),
-(75, 1, 8, 1, 40000);
+(75, 1, 8, 1, 40000),
+(91, 2, 1, 1, 5000),
+(92, 3, 1, 1, 5000);
 
 -- --------------------------------------------------------
 
@@ -258,7 +261,7 @@ CREATE TABLE `products` (
   `product_desc` text NOT NULL,
   `product_image` text NOT NULL,
   `product_keywords` text NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
 --
 -- Dumping data for table `products`
@@ -274,12 +277,6 @@ INSERT INTO `products` (`product_id`, `product_cat`, `product_brand`, `product_t
 (7, 1, 1, 'Laptop Pavillion', 50000, 'Laptop Hp Pavillion', 'laptop_PNG5930.png', 'Laptop Hp Pavillion'),
 (8, 1, 4, 'Sony', 40000, 'Sony Mobile', '530201353846AM_635_sony_xperia_z.png', 'sony mobile'),
 (9, 1, 3, 'iPhone New', 12000, 'iphone', 'iphone-hd-png-iphone-apple-png-file-550.png', 'iphone apple mobile'),
-(10, 2, 6, 'Red Ladies dress', 1000, 'red dress for girls', 'red dress.jpg', 'red dress '),
-(11, 2, 6, 'Blue Heave dress', 1200, 'Blue dress', 'images.jpg', 'blue dress cloths'),
-(12, 2, 6, 'Ladies Casual Cloths', 1500, 'ladies casual summer two colors pleted', '7475-ladies-casual-dresses-summer-two-colors-pleated.jpg', 'girl dress cloths casual'),
-(13, 2, 6, 'SpringAutumnDress', 1200, 'girls dress', 'Spring-Autumn-Winter-Young-Ladies-Casual-Wool-Dress-Women-s-One-Piece-Dresse-Dating-Clothes-Medium.jpg_640x640.jpg', 'girl dress'),
-(14, 2, 6, 'Casual Dress', 1400, 'girl dress', 'download.jpg', 'ladies cloths girl'),
-(15, 2, 6, 'Formal Look', 1500, 'girl dress', 'shutterstock_203611819.jpg', 'ladies wears dress girl'),
 (16, 3, 6, 'Sweter for men', 600, '2012-Winter-Sweater-for-Men-for-better-outlook', '2012-Winter-Sweater-for-Men-for-better-outlook.jpg', 'black sweter cloth winter'),
 (17, 3, 6, 'Gents formal', 1000, 'gents formal look', 'gents-formal-250x250.jpg', 'gents wear cloths'),
 (19, 3, 6, 'Formal Coat', 3000, 'ad', 'images (1).jpg', 'coat blazer gents'),
@@ -298,7 +295,6 @@ INSERT INTO `products` (`product_id`, `product_cat`, `product_brand`, `product_t
 (37, 6, 5, 'LED TV', 20000, 'LED TV', 'images (4).jpg', 'led tv lg'),
 (38, 6, 4, 'Microwave Oven', 3500, 'Microwave Oven', 'images.jpg', 'Microwave Oven'),
 (39, 6, 5, 'Mixer Grinder', 2500, 'Mixer Grinder', 'singer-mixer-grinder-mg-46-medium_4bfa018096c25dec7ba0af40662856ef.jpg', 'Mixer Grinder'),
-(40, 2, 6, 'Formal girls dress', 3000, 'Formal girls dress', 'girl-walking.jpg', 'ladies'),
 (45, 1, 2, 'Samsung Galaxy Note 3', 10000, '0', 'samsung_galaxy_note3_note3neo.JPG', 'samsung galaxy Note 3 neo'),
 (46, 1, 2, 'Samsung Galaxy Note 3', 10000, '', 'samsung_galaxy_note3_note3neo.JPG', 'samsung galxaxy note 3 neo'),
 (47, 4, 6, 'Laptop', 650, 'nbk', 'product01.png', 'Dell Laptop'),
@@ -352,7 +348,7 @@ CREATE TABLE `user_info` (
   `mobile` varchar(10) NOT NULL,
   `address1` varchar(300) NOT NULL,
   `address2` varchar(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
 --
 -- Dumping data for table `user_info`
@@ -365,9 +361,8 @@ INSERT INTO `user_info` (`user_id`, `first_name`, `last_name`, `email`, `passwor
 (19, 'abhishek', 'bs', 'abhishekbs@gmail.com', 'asdcsdcc', '9871236534', 'bangalore', 'hassan'),
 (21, 'prajval', 'mcta', 'prajvalmcta@gmail.com', '1234545662', '202-555-01', 'bangalore', 'kumbalagodu'),
 (22, 'puneeth', 'v', 'hemu@gmail.com', '1234534', '9877654334', 'snhdgvajfehyfygv', 'asdjbhfkeur'),
-(23, 'hemanth', 'reddy', 'hemanth@gmail.com', 'Puneeth@123', '9876543234', 'Bangalore', 'Kumbalagodu'),
-(24, 'newuser', 'user', 'newuser@gmail.com', 'puneeth@123', '9535688928', 'Bangalore', 'Kumbalagodu'),
-(25, 'otheruser', 'user', 'otheruser@gmail.com', 'puneeth@123', '9535688928', 'Bangalore', 'Kumbalagodu');
+(25, 'otheruser', 'user', 'otheruser@gmail.com', 'puneeth@123', '9535688928', 'Bangalore', 'Kumbalagodu'),
+(26, 'aa', 'aaa', 'alkefyhzizem@gmail.com', 'AMINE1234', '0233559392', 'morocco', 'morooco');
 
 --
 -- Triggers `user_info`
@@ -394,7 +389,7 @@ CREATE TABLE `user_info_backup` (
   `mobile` varchar(10) NOT NULL,
   `address1` varchar(300) NOT NULL,
   `address2` varchar(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
 --
 -- Dumping data for table `user_info_backup`
@@ -411,7 +406,8 @@ INSERT INTO `user_info_backup` (`user_id`, `first_name`, `last_name`, `email`, `
 (22, 'puneeth', 'v', 'hemu@gmail.com', '1234534', '9877654334', 'snhdgvajfehyfygv', 'asdjbhfkeur'),
 (23, 'hemanth', 'reddy', 'hemanth@gmail.com', 'Puneeth@123', '9876543234', 'Bangalore', 'Kumbalagodu'),
 (24, 'newuser', 'user', 'newuser@gmail.com', 'puneeth@123', '9535688928', 'Bangalore', 'Kumbalagodu'),
-(25, 'otheruser', 'user', 'otheruser@gmail.com', 'puneeth@123', '9535688928', 'Bangalore', 'Kumbalagodu');
+(25, 'otheruser', 'user', 'otheruser@gmail.com', 'puneeth@123', '9535688928', 'Bangalore', 'Kumbalagodu'),
+(26, 'aa', 'aaa', 'alkefyhzizem@gmail.com', 'AMINE1234', '0233559392', 'morocco', 'morooco');
 
 --
 -- Indexes for dumped tables
@@ -512,7 +508,7 @@ ALTER TABLE `brands`
 -- AUTO_INCREMENT for table `cart`
 --
 ALTER TABLE `cart`
-  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=147;
+  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=149;
 
 --
 -- AUTO_INCREMENT for table `categories`
@@ -548,7 +544,7 @@ ALTER TABLE `orders_info`
 -- AUTO_INCREMENT for table `order_products`
 --
 ALTER TABLE `order_products`
-  MODIFY `order_pro_id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=91;
+  MODIFY `order_pro_id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=93;
 
 --
 -- AUTO_INCREMENT for table `products`
@@ -560,13 +556,13 @@ ALTER TABLE `products`
 -- AUTO_INCREMENT for table `user_info`
 --
 ALTER TABLE `user_info`
-  MODIFY `user_id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
+  MODIFY `user_id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
 
 --
 -- AUTO_INCREMENT for table `user_info_backup`
 --
 ALTER TABLE `user_info_backup`
-  MODIFY `user_id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
+  MODIFY `user_id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
 
 --
 -- Constraints for dumped tables
